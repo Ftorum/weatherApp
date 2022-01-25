@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<h4>New Subscription</h4>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ city.picture.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{city.name}}</h5>
+        <p class="card-text">Temperature: {{city.temperature}} ℃</p>
+        <p class="card-text">Humidity: {{city.humidity}}%</p>        
+        {% if subscribe_status == True %}
+        <p class="card-text">Period: ones in {{subscription.period}} h</p>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+  {% if subscribe_status == True %}
+  <a class="btn btn-success" href="{%url 'subs_edit' city.id %}" role="button">Edit subcription</a>
+  <a class="btn btn-warning" href="{%url 'subscribe' 0 city.id%}" role="button">Unsubscribe</a>
+  {% else %}
+  <a class="btn btn-success" href="{%url 'subscribe' 1 city.id%}" role="button">Subscribe</a>
+  {% endif  %}
+</div>
+<br>
+{%endblock%}

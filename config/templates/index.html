@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{%block content%}
+{%for city in cities%}
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ city.picture.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{city.name}}</h5>
+        <p class="card-text">Temperature: {{city.temperature}} ℃</p>
+        <p class="card-text">Humidity: {{city.humidity}}%</p>
+      </div>
+    </div>
+  </div>
+  <a class="btn btn-primary" href="{%url 'subs_detail' city.pk%}" role="button">Details</a>
+</div>
+<br>
+{%endfor%}
+{%endblock%}

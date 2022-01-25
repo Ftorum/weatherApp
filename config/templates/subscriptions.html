@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+
+{%block content%}
+<h3>All Subscriptions</h3>
+{%for sub in subs%}
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{sub.city.picture.url}}" class="img-fluid rounded-start" alt="Placeholder image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{sub.city.name}}</h5>
+          <p class="card-text">{{sub.city.temperature}} ℃</p>
+          <p class="card-text">{{sub.city.humidity}} %</p>
+          <a href="{% url 'subs_edit' sub.city.id%}"><button type="button" class="btn btn-info">Change subscription</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+{%endblock%}
