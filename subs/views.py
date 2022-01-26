@@ -9,12 +9,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .forms import EditSubscriptionForm
 from django.contrib.auth.decorators import login_required
 import requests
+from .tasks import send
 
 
 def get_weather_data(city_name):
     r = requests.get(
-        'https://api.weatherbit.io/v2.0/current?city={0}&country={1}&key=4f4ca41570ec45c78c692a6d421cdcff'.format(city_name, 'RU'))
+        'https://api.weatherbit.io/v2.0/current?city={0}&country={1}&key='.format(city_name, 'RU'))
     r_status = r.status_code
+    print(r_status)
+    send('westftorum@gmail.com')
     if r_status == 200:
         r_json = r.json()
         hum = r_json['data'][0]['rh']
